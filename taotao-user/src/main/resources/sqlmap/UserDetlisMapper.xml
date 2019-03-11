@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taotao.user.mapper.UserDetlisMapper">
+    <resultMap id="BaseResultMap" type="com.taotao.commen.pojo.user.UserDetlis">
+        <result column="u_id" property="uId" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="money" property="money" jdbcType="BIGINT"/>
+        <result column="money_status" property="moneyStatus" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    u_id, username, money, money_status
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.taotao.commen.pojo.user.UserDetlisExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from user_detlis
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.taotao.commen.pojo.user.UserDetlisExample">
+        delete from user_detlis
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.taotao.commen.pojo.user.UserDetlis">
+    insert into user_detlis (u_id, username, money, 
+      money_status)
+    values (#{uId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{money,jdbcType=BIGINT}, 
+      #{moneyStatus,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.taotao.commen.pojo.user.UserDetlis">
+        insert into user_detlis
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uId != null">
+                u_id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="money != null">
+                money,
+            </if>
+            <if test="moneyStatus != null">
+                money_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uId != null">
+                #{uId,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="money != null">
+                #{money,jdbcType=BIGINT},
+            </if>
+            <if test="moneyStatus != null">
+                #{moneyStatus,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.taotao.commen.pojo.user.UserDetlisExample"
+            resultType="java.lang.Integer">
+        select count(*) from user_detlis
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update user_detlis
+        <set>
+            <if test="record.uId != null">
+                u_id = #{record.uId,jdbcType=INTEGER},
+            </if>
+            <if test="record.username != null">
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+            <if test="record.money != null">
+                money = #{record.money,jdbcType=BIGINT},
+            </if>
+            <if test="record.moneyStatus != null">
+                money_status = #{record.moneyStatus,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update user_detlis
+        set u_id = #{record.uId,jdbcType=INTEGER},
+        username = #{record.username,jdbcType=VARCHAR},
+        money = #{record.money,jdbcType=BIGINT},
+        money_status = #{record.moneyStatus,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+
+    <update id="tryFrozen" parameterType="int">
+         update user_detlis set money_status=1 where u_id=#{uid}
+    </update>
+
+    <update id="confirmReduceMoney" parameterType="int">
+         update user_detlis set money= money - #{money}, money_status=0 where u_id=#{uid}
+    </update>
+
+    <update id="cancelFrozen" parameterType="int">
+         update user_detlis set money_status=0 where u_id=#{uid}
+    </update>
+
+</mapper>

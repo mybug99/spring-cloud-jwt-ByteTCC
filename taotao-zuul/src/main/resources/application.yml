@@ -1,0 +1,28 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: spring-cloud-zuul
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+zuul:
+  sensitive-headers:
+  routes:
+    users:
+      path: /user/**
+      serviceId: SPRING-CLOUD-USER
+    orders:
+      path: /order/**
+      serviceId: SPRING-CLOUD-ORDER
+  add-proxy-headers: true
+  add-host-header: true
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000

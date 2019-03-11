@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="taotao-commen" />
+        <module name="taotao-eureka" />
+        <module name="taotao-order" />
+        <module name="taotao-user" />
+        <module name="taotao-zuul" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
