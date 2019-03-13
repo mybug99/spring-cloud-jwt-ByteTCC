@@ -27,9 +27,14 @@ public class PayController {
 
     @RequestMapping("/PayOrder")
     @Transactional
-    public int PayOrder(@RequestParam(value = "token",defaultValue = "0000") String token, String orderNum) throws BusinessException {
+    public int PayOrder(@RequestParam(value = "token", defaultValue = "0000") String token, String orderNum) throws BusinessException {
         token = CookiesUtils.getCookisToken(request);
-        int i = payOrderServiceImpl.PayOrder(token, orderNum);
+        int i = 0;
+        try {
+            i = payOrderServiceImpl.PayOrder(token, orderNum);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         if (i < 0)
             return 1;
         return 2;

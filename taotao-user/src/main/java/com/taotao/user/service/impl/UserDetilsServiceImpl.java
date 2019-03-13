@@ -27,17 +27,17 @@ public class UserDetilsServiceImpl implements UserDetilsService {
     @Transactional
     public int ReduceMoney(int uid, int money) throws BusinessException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println("当前进入try----money"+sdf.format(new Date()));
+        System.out.println("当前进入try----money" + sdf.format(new Date()));
         UserDetlisExample userDetlisExample = new UserDetlisExample();
         userDetlisExample.createCriteria().andUIdEqualTo(uid);
         List<UserDetlis> userDetlis = userDetlisMapper.selectByExample(userDetlisExample);
-        if (userDetlis.size() > 0) {
+        if (!userDetlis.isEmpty()) {
             if (userDetlis.get(0).getMoney() < Long.parseLong(money + "")) {
                 throw new BusinessException(ResponseEnum.USER_ERROR_MONEY);
             } else if (userDetlis.get(0).getMoneyStatus() == 1) {
-               throw new BusinessException(ResponseEnum.USER_ERROR);
+                throw new BusinessException(ResponseEnum.USER_ERROR);
             }
-        }else {
+        } else {
             throw new BusinessException(ResponseEnum.USER_ERROR);
         }
         return userDetlisMapper.tryFrozen(uid);

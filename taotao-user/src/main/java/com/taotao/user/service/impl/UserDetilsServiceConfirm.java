@@ -1,9 +1,7 @@
 package com.taotao.user.service.impl;
 
-import com.taotao.commen.exception.BusinessException;
 import com.taotao.user.mapper.UserDetlisMapper;
 import com.taotao.user.service.UserDetilsService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -24,7 +22,7 @@ public class UserDetilsServiceConfirm implements UserDetilsService {
 
     @Override
     @Transactional
-    public int ReduceMoney(int uid, int money) throws BusinessException {
+    public int ReduceMoney(int uid, int money){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println("当前进入confirm-----Money" + sdf.format(new Date()));
         int i = userDetlisMapper.confirmReduceMoney(uid, money);

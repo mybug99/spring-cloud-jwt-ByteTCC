@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class AllException {
 
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(value = RuntimeException.class)
     @ResponseBody
-    public BaseResponse jsonErrorHandler(HttpServletRequest request, Exception e) throws Exception{
+    public BaseResponse jsonErrorHandler(Exception e){
         BaseResponse response = new BaseResponse();
         System.out.println(e.getMessage());
         if(e instanceof BusinessException ){

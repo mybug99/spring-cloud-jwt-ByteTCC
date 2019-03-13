@@ -31,7 +31,7 @@ public class PayOrderServiceImpl implements PayOrderService {
 
     @Override
     @Transactional
-    public int PayOrder( String token, String orderNum) throws BusinessException {
+    public int PayOrder(String token, String orderNum) throws BusinessException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println("当前进入try----order" + sdf.format(new Date()));
         User user = new Gson().fromJson(JwtHelper.verifyToken(token), User.class);
@@ -39,7 +39,7 @@ public class PayOrderServiceImpl implements PayOrderService {
         orderExample.createCriteria().andOrderNumEqualTo(orderNum);
         List<Order> orderList = orderMapper.selectByExample(orderExample);
         Order order = orderList.get(0);
-        int i = userFeign.ReduceMoney(user.getId(), Integer.parseInt(order.getMoney()));
+        int i =  userFeign.ReduceMoney(user.getId(), Integer.parseInt(order.getMoney()));
         if (i < 0) {
             return i;
         }

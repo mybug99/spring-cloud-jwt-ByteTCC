@@ -17,7 +17,7 @@ public class UserDetilsServiceCancel implements UserDetilsService {
 
     @Override
     @Transactional
-    public int ReduceMoney(int uid, int money) throws BusinessException {
+    public int ReduceMoney(int uid, int money){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println("当前进入cancel-----money" + sdf.format(new Date()));
         int i = userDetlisMapper.cancelFrozen(uid);
