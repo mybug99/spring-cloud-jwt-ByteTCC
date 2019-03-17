@@ -8,6 +8,7 @@ public enum ResponseEnum {
     USER_MONEY_FROZEN(200,"您当前资金在冻结状态"),
     USER_ERROR(400,"用户不存在"),
     UNKNOWN_ERROR(400,"用户不存在"),
+    ORDER_PAY(500,"当前订单已支付"),
     ;
 
     private int code;

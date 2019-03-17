@@ -1,6 +1,7 @@
 package com.taotao.order.service.impl;
 
 import com.google.gson.Gson;
+import com.taotao.commen.Enum.ResponseEnum;
 import com.taotao.commen.exception.BusinessException;
 import com.taotao.commen.pojo.order.Order;
 import com.taotao.commen.pojo.order.OrderExample;
@@ -39,7 +40,10 @@ public class PayOrderServiceImpl implements PayOrderService {
         orderExample.createCriteria().andOrderNumEqualTo(orderNum);
         List<Order> orderList = orderMapper.selectByExample(orderExample);
         Order order = orderList.get(0);
-        int i =  userFeign.ReduceMoney(user.getId(), Integer.parseInt(order.getMoney()));
+        if (order.getOrderState() == 1) {
+            throw new BusinessException(ResponseEnum.ORDER_PAY);
+        }
+        int i = userFeign.ReduceMoney(user.getId(), Integer.parseInt(order.getMoney()));
         if (i < 0) {
             return i;
         }

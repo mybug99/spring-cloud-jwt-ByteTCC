@@ -26,4 +26,5 @@ public interface UserDetlisMapper {
     int confirmReduceMoney(@Param("uid")int uid,@Param("money") int money);
 
     int cancelFrozen(@Param("uid")int uid);
+    int cancelFrozen(@Param("uid")int uid,String a);
 }

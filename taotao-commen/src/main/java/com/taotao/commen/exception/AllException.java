@@ -16,6 +16,11 @@ public class AllException {
     public BaseResponse jsonErrorHandler(Exception e){
         BaseResponse response = new BaseResponse();
         System.out.println(e.getMessage());
+        if("Heuristic completion: outcome state is rolled back; nested exception is javax.transaction.HeuristicRollbackException".equals(e.getMessage())){
+            response.setCode(500);
+            response.setMessage("购买失败");
+            return response;
+        }
         if(e instanceof BusinessException ){
             response.setCode(((BusinessException)e).getCode());
             response.setMessage(e.getMessage());

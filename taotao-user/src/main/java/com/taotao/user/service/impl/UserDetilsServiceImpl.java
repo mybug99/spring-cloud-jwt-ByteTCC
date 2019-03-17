@@ -35,7 +35,8 @@ public class UserDetilsServiceImpl implements UserDetilsService {
             if (userDetlis.get(0).getMoney() < Long.parseLong(money + "")) {
                 throw new BusinessException(ResponseEnum.USER_ERROR_MONEY);
             } else if (userDetlis.get(0).getMoneyStatus() == 1) {
-                throw new BusinessException(ResponseEnum.USER_ERROR);
+                System.out.println("资金冻结");
+                throw new BusinessException(ResponseEnum.USER_MONEY_FROZEN);
             }
         } else {
             throw new BusinessException(ResponseEnum.USER_ERROR);
