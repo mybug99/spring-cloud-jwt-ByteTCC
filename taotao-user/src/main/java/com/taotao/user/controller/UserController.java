@@ -9,20 +9,23 @@ import com.google.gson.Gson;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
+@RefreshScope
 public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Value("${lia.names}")
+    String names;
 
     @RequestMapping("/isLogin")
     public String isLogin() {
@@ -35,10 +38,10 @@ public class UserController {
         return "index";
     }
 
-    @RequestMapping("/hello")
-    public String hello() {
-        System.out.println("hello");
-        return "hello";
+    @RequestMapping("/hey")
+    @ResponseBody
+    public String hey(){
+        return names;
     }
 
     @RequestMapping("/auth")
@@ -80,9 +83,16 @@ public class UserController {
         return "redirect:/user/index";
     }
 
+    @RequestMapping("/hello")
+    @ResponseBody
+    public String hello(@RequestParam("hello")String hello){
+        return "hello "+hello;
+    }
     public String authFallback(HttpServletResponse response, String username, String password) throws BusinessException {
         throw new BusinessException(ResponseEnum.USER_ERROR_USERNAME);
     }
+
+
 
 
 }

@@ -5,22 +5,30 @@ import com.taotao.commen.pojo.order.Order;
 import com.taotao.commen.pojo.user.User;
 import com.taotao.commen.utils.CookiesUtils;
 import com.taotao.commen.utils.user.JwtHelper;
+import com.taotao.order.Feign.UserFeign;
 import com.taotao.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@RefreshScope
 @Controller
 public class OrderCreateController {
 
     @Autowired
     OrderService orderServiceImpl;
+    @Autowired
+    UserFeign userFeign;
+
+    @Value("${config.names}")
+    private String showName;
 
 
     @RequestMapping("/order")
@@ -51,5 +59,17 @@ public class OrderCreateController {
         return mv;
     }
 
+    @RequestMapping("/showName")
+    @ResponseBody
+    public String showName(){
+        return showName;
+    }
+
+
+    @RequestMapping("/hello/{hello}")
+    @ResponseBody
+    public String hello(@PathVariable("hello")String hello){
+        return userFeign.hello(hello);
+    }
 
 }

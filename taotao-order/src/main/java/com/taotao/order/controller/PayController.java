@@ -6,9 +6,12 @@ import com.taotao.order.service.PayOrderService;
 import org.bytesoft.compensable.Compensable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ViewResolver;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +32,7 @@ public class PayController {
     @Transactional
     public int PayOrder(@RequestParam(value = "token", defaultValue = "0000") String token, String orderNum) throws BusinessException {
         token = CookiesUtils.getCookisToken(request);
+        ModelAndView modelAndView = new ModelAndView("");
         int i = 0;
         try {
             i = payOrderServiceImpl.PayOrder(token, orderNum);
