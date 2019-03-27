@@ -1,8 +1,4 @@
-server:
-  port: 8090
 spring:
-  main:
-    allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.jdbc.Driver #当前驱动
     url: jdbc:mysql://127.0.0.1:3306/cloud-order?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC #链接mysql的地址
@@ -22,8 +18,4 @@ mybatis:
 feign:
   hystrix:
     enabled: true #开启hystrix
-logging:
-  level:
-    com.taotao.order.mapper.OrderMapper: Debug
-config:
-  names: 1
+hey: 123

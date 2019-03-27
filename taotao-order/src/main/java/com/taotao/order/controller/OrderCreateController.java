@@ -27,7 +27,7 @@ public class OrderCreateController {
     @Autowired
     UserFeign userFeign;
 
-    @Value("${config.names}")
+    @Value("${hey}")
     private String showName;
 
 

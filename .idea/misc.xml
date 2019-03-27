@@ -5,10 +5,6 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/taotao-eureka/pom.xml" />
-        <option value="$PROJECT_DIR$/taotao-user/pom.xml" />
-        <option value="$PROJECT_DIR$/taotao-zuul/pom.xml" />
-        <option value="$PROJECT_DIR$/taotao-order/pom.xml" />
       </list>
     </option>
   </component>

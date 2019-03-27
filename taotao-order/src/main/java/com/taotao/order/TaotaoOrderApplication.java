@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication(exclude = MongoAutoConfiguration.class)
-@EnableDiscoveryClient  //注册到nacos
+
 @EnableFeignClients
 @EnableHystrix
 @MapperScan("com.taotao.order.mapper")
 @ComponentScan("com.taotao.commen.exception")
 @ComponentScan("com.taotao.order")
-@Import(SpringCloudSecondaryConfiguration.class)
+@EnableDiscoveryClient  //注册到nacos
+@SpringBootApplication(exclude = MongoAutoConfiguration.class)
 public class TaotaoOrderApplication {
 
 
@@ -35,12 +35,14 @@ public class TaotaoOrderApplication {
 
     @RestController
     @RefreshScope
-    class TestController{
-        @Value("${config.names}")
+    class TestController {
+
+        @Value("${hey}")
         private String name;
 
-        @RequestMapping("/hey")
-        public String hey(){
+            @RequestMapping("/hey")
+        public String hey() {
+                new Thread().notify();
             return name;
         }
     }
