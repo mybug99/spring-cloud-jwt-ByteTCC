@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: nacos-order
   cloud:
     sentinel:
       transport:
@@ -12,8 +10,4 @@ spring:
         namespace: 4f4696b7-ef04-48af-901e-ece0377325bc
       config:
         server-addr: 127.0.0.1:8848
-        namespace: 4f4696b7-ef04-48af-901e-ece0377325bc
         file-extension: yml
-server:
-  port: 8090
-

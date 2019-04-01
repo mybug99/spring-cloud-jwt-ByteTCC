@@ -1,5 +1,7 @@
 package com.taotao.order.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.google.gson.Gson;
 import com.taotao.commen.pojo.order.Order;
 import com.taotao.commen.pojo.user.User;
@@ -30,9 +32,12 @@ public class OrderCreateController {
     @Value("${hey}")
     private String showName;
 
+    @Value("${server.port}")
+    private String port;
+
 
     @RequestMapping("/order")
-    public String order(){
+    public String order() {
         return "createOrder";
     }
 
@@ -61,15 +66,32 @@ public class OrderCreateController {
 
     @RequestMapping("/showName")
     @ResponseBody
-    public String showName(){
+    public String showName() {
         return showName;
     }
 
 
     @RequestMapping("/hello/{hello}")
     @ResponseBody
-    public String hello(@PathVariable("hello")String hello){
+    @SentinelResource(value = "hello", blockHandler = "helloBlockHandler")
+    public String hello(@PathVariable("hello") String hello) {
+        System.out.println("===" + port);
         return userFeign.hello(hello);
+    }
+
+    public static String helloBlockHandler(String hello, BlockException ex) {
+        ex.printStackTrace() ;
+        System.out.println("aaa");
+        return "trows Excetion";
+    }
+
+
+    public static void main(String[] args) {
+        int i=0,k=10;
+        while (k-->0){
+            i=i++;
+        }
+        System.out.println(i);
     }
 
 }

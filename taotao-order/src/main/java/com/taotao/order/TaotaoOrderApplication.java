@@ -20,10 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 
 @EnableFeignClients
-@EnableHystrix
 @MapperScan("com.taotao.order.mapper")
-@ComponentScan("com.taotao.commen.exception")
-@ComponentScan("com.taotao.order")
 @EnableDiscoveryClient  //注册到nacos
 @SpringBootApplication(exclude = MongoAutoConfiguration.class)
 public class TaotaoOrderApplication {
@@ -40,9 +37,8 @@ public class TaotaoOrderApplication {
         @Value("${hey}")
         private String name;
 
-            @RequestMapping("/hey")
+        @RequestMapping("/hey")
         public String hey() {
-                new Thread().notify();
             return name;
         }
     }

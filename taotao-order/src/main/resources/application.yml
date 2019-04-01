@@ -13,9 +13,11 @@ spring:
         max-idle: 50
         min-idle: 20
         max-wait: 2000ms
+
 mybatis:
   mapper-locations: classpath:/sqlmap/*.xml
 feign:
   hystrix:
     enabled: true #开启hystrix
+
 hey: 123

@@ -26,6 +26,8 @@ public class UserController {
 
     @Value("${lia.names}")
     String names;
+    @Value("${server.port}")
+    String port;
 
     @RequestMapping("/isLogin")
     public String isLogin() {
@@ -86,6 +88,7 @@ public class UserController {
     @RequestMapping("/hello")
     @ResponseBody
     public String hello(@RequestParam("hello")String hello){
+        System.out.println("port="+port);
         return "hello "+hello;
     }
     public String authFallback(HttpServletResponse response, String username, String password) throws BusinessException {
