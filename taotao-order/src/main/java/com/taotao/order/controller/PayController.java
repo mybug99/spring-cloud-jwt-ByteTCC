@@ -3,7 +3,6 @@ package com.taotao.order.controller;
 import com.taotao.commen.exception.BusinessException;
 import com.taotao.commen.utils.CookiesUtils;
 import com.taotao.order.service.PayOrderService;
-import org.bytesoft.compensable.Compensable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -16,11 +15,11 @@ import org.springframework.web.servlet.ViewResolver;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@Compensable(
+/*@Compensable(
         interfaceClass = PayOrderService.class,
         confirmableKey = "payOrderServiceConfirm",
         cancellableKey = "payOrderServiceCancel"
-)
+)*/
 public class PayController {
 
     @Autowired
@@ -39,8 +38,9 @@ public class PayController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        if (i < 0)
+        if (i < 0) {
             return 1;
+        }
         return 2;
     }
 }

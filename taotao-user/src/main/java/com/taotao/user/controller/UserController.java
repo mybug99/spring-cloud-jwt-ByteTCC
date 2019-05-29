@@ -73,8 +73,9 @@ public class UserController {
         String result = JwtHelper.verifyToken(token); //校验tiken是否有效
         User user = new Gson().fromJson(result, User.class);
         user.setToken(token);
-        if (user != null)
+        if (user != null){
             return user;
+        }
         throw new BusinessException(ResponseEnum.USER_ERROR_TOKEN);
     }
 

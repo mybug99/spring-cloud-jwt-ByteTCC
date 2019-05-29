@@ -7,7 +7,6 @@ import com.taotao.commen.pojo.order.OrderExample;
 import com.taotao.order.mapper.OrderMapper;
 import com.taotao.order.service.PayOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +20,6 @@ public class PayOrderServiceConfirm implements PayOrderService {
     @Autowired
     OrderMapper orderMapper;
 
-    @Autowired
-    StringRedisTemplate stringRedisTemplate;
 
     @Override
     @Transactional

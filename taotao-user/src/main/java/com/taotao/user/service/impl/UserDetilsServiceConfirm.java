@@ -3,7 +3,6 @@ package com.taotao.user.service.impl;
 import com.taotao.user.mapper.UserDetlisMapper;
 import com.taotao.user.service.UserDetilsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +16,6 @@ public class UserDetilsServiceConfirm implements UserDetilsService {
     @Autowired
     UserDetlisMapper userDetlisMapper;
 
-    @Autowired
-    StringRedisTemplate stringRedisTemplate;
 
     @Override
     @Transactional

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @RefreshScope
@@ -42,7 +44,7 @@ public class OrderCreateController {
     }
 
     @RequestMapping("/payOrder")
-    public String orderCreate(HttpServletRequest request, String productName, String money, @RequestHeader("Referer") String url) {
+    public String orderCreate(HttpServletRequest request, HttpServletResponse response, String productName, String money, @RequestHeader("Referer") String url) {
         String token = CookiesUtils.getCookisToken(request);
         if (token.equals(""))
             return "redirect:" + url;
@@ -53,7 +55,7 @@ public class OrderCreateController {
         if (i > 0) {
             return "redirect:/order/getOrder?orderNum=" + uuid;
         }
-        return "eoore";
+        return "error";
     }
 
     @RequestMapping("/getOrder")
@@ -73,25 +75,22 @@ public class OrderCreateController {
 
     @RequestMapping("/hello/{hello}")
     @ResponseBody
-    @SentinelResource(value = "hello", blockHandler = "helloBlockHandler")
+    @SentinelResource(value = "hello", blockHandler = "helloBlockHandler",fallback = "helloExcetion")
     public String hello(@PathVariable("hello") String hello) {
         System.out.println("===" + port);
         return userFeign.hello(hello);
     }
 
     public static String helloBlockHandler(String hello, BlockException ex) {
-        ex.printStackTrace() ;
+        ex.printStackTrace();
         System.out.println("aaa");
         return "trows Excetion";
     }
-
-
-    public static void main(String[] args) {
-        int i=0,k=10;
-        while (k-->0){
-            i=i++;
-        }
-        System.out.println(i);
+    public static String helloExcetion(String hello) {
+        System.out.println("异常降级");
+        return "trows 异常降级";
     }
+
+
 
 }

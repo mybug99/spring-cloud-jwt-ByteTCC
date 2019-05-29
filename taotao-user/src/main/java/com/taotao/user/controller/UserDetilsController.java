@@ -2,7 +2,6 @@ package com.taotao.user.controller;
 
 import com.taotao.commen.exception.BusinessException;
 import com.taotao.user.service.UserDetilsService;
-import org.bytesoft.compensable.Compensable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-@Compensable(
-        interfaceClass = UserDetilsService.class,
-        confirmableKey = "userDetilsServiceConfirm",
-        cancellableKey = "userDetilsServiceCancel"
-)
 public class UserDetilsController {
 
     @Resource

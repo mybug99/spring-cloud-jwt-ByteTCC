@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: nacos-user
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      eager: true
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8847,127.0.0.1:8848,127.0.0.1:8849
+      config:
+        server-addr: 127.0.0.1:8847,127.0.0.1:8848,127.0.0.1:8849
+        file-extension: yml

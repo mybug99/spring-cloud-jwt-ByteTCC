@@ -10,7 +10,6 @@ import com.taotao.commen.utils.user.JwtHelper;
 import com.taotao.order.Feign.UserFeign;
 import com.taotao.order.mapper.OrderMapper;
 import com.taotao.order.service.PayOrderService;
-import org.bytesoft.compensable.Compensable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
